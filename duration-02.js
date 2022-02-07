@@ -1,22 +1,23 @@
- let overall_seconds = []
- let overall_minutes = []
- let overall_hours = []
- let nextPageToken = ''
+
  let Alphapet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+ let name = document.getElementById('name')
  input = document.getElementById('input')
  btn = document.getElementById('btn')
  btn.addEventListener('click',function(e){
+  let overall_seconds = []
+  let overall_minutes = []
+  let overall_hours = []
+  let nextPageToken = ''
    e.preventDefault()
+   let url_03 = 'https://www.googleapis.com/youtube/v3/playlists?part=snippet&part=contentDetails&id='+input.value+'&maxResults=10&key=AIzaSyAs4V-sKOxoMLGcjoJBoWxCxOTl2sWeloU'
+   fetch(url_03).then(data=>{return data.json()}).then(res=>{name.innerHTML = res.items[0].snippet.title})
    let ids =''
-   const url ='https://www.googleapis.com/youtube/v3/playlistItems?key=AIzaSyAs4V-sKOxoMLGcjoJBoWxCxOTl2sWeloU&playlistId='+input.value+'&part=contentDetails&maxResults=100&pageToken='+nextPageToken
-
-   let index
-   let yeah = true
+   const url ='https://www.googleapis.com/youtube/v3/playlistItems?key=AIzaSyAs4V-sKOxoMLGcjoJBoWxCxOTl2sWeloU&playlistId='+input.value+'&part=snippet&part=contentDetails&maxResults=100'
    let temp
    while(true){
      yeah = false
      fetch(url).then(data=>{return data.json()}).then(res=>{
-       console.log(res)
+       console.log(res.snippet)
        nextPageToken = res.nextPageToken
        for(variable in res.items){
        ids = ids +res.items[variable].contentDetails.videoId+','
@@ -104,3 +105,5 @@
 
 
  })
+
+
