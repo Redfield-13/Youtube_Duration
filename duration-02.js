@@ -2,8 +2,14 @@
  let Alphapet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  let name = document.getElementById('name')
  input = document.getElementById('input')
-
+ btn_02 = document.getElementById('clear')
  btn = document.getElementById('btn')
+
+ btn_02.addEventListener('click',function(e){
+   input.value = ''
+   name.innerHTML = 'Title : '
+   document.getElementById('duration').innerHTML = 'Duration : '
+ })
  btn.addEventListener('click',function(e){
      if (input.value[0] == 'h') {
          input.value = input.value.slice(input.value.indexOf('PL'))
