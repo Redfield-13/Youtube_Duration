@@ -2,8 +2,12 @@
  let Alphapet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
  let name = document.getElementById('name')
  input = document.getElementById('input')
+
  btn = document.getElementById('btn')
  btn.addEventListener('click',function(e){
+     if (input.value[0] == 'h') {
+         input.value = input.value.slice(input.value.indexOf('PL'))
+     }
   let overall_seconds = []
   let overall_minutes = []
   let overall_hours = []
@@ -13,15 +17,17 @@
    fetch(url_03).then(data=>{return data.json()}).then(res=>{name.innerHTML = res.items[0].snippet.title})
    let ids =''
    const url ='https://www.googleapis.com/youtube/v3/playlistItems?key=AIzaSyAs4V-sKOxoMLGcjoJBoWxCxOTl2sWeloU&playlistId='+input.value+'&part=snippet&part=contentDetails&maxResults=100'
-   let temp
-   while(true){
+    // do {
+
+    // } while ();
+    let yeah= true
+   while(yeah){
      yeah = false
      fetch(url).then(data=>{return data.json()}).then(res=>{
        console.log(res.snippet)
        nextPageToken = res.nextPageToken
        for(variable in res.items){
        ids = ids +res.items[variable].contentDetails.videoId+','
-       temp = res.nextPageToken
 
      }})
 
@@ -96,14 +102,9 @@
      document.getElementById('duration').innerHTML = final_hours+':'+sum_minutes+':'+sum_seconds;
 
      },4500)
-     if (!temp){
-       break;
-     }
    }
 
 
 
 
  })
-
-
